@@ -1,0 +1,380 @@
+
+\begin{description}
+
+% \item[Geogebra] 
+
+% \link{  .ggb}{GeoGebra applet}
+
+\item[R] 
+
+\link{http://www.math.unl.edu/~sdunbar1/Probability/Lessons/MarkovChains/StandardExamples/absorbingbdy.R}{R script for
+  Random Walk with Absorbing Boundaries.}
+
+\begin{lstlisting}[language=R]
+library(markovchain)
+
+N <- 7
+stateNames <- as.character( 0:N )
+transMatrix <- matrix(0, N+1,N+1)
+transMatrix[1,1] <- 1
+transMatrix[N+1, N+1] <- 1
+for (row in 2:N) {  #row 2 is state 1, row 7 is state 6
+    transMatrix[row, row-1] <- 1/2
+    transMatrix[row, row+1] <- 1/2
+}
+startState <- "3"
+
+absorbingbdy <- new("markovchain", transitionMatrix=transMatrix,
+                 states=stateNames, name="AbsorbingBdy")
+print(absorbingbdy)
+
+print( summary(absorbingbdy) )
+
+pathLength <- 10 
+path <- rmarkovchain(n=pathLength,
+                            object = absorbingbdy, t0 = startState)
+cat("A sample starting from ", startState, path, "\n")
+path <- rmarkovchain(n=pathLength,
+                            object = absorbingbdy, t0 = startState)
+cat("Another sample starting from ", startState, path, "\n")
+
+if ( length( transientStates(absorbingbdy) ) == 0 ) {
+    largeN <- 1000; startStable <- 100
+    path <- rmarkovchain(n=largeN,
+                            object = absorbingbdy, t0 = startState)
+    stablePattern <-  path[startStable:largeN]
+    empiricalStable <- rep(0, N+1)
+    for (i in seq_along(stateNames)) { 
+        empiricalStable[i] <-  mean( stablePattern == (i-1) )
+    }
+    theorStable <- steadyStates(absorbingbdy)
+    cat("Empirical stable distribution: ",  empiricalStable, "\n")
+    cat("Theoretical stable distribution: ", theorStable, "\n")
+}
+\end{lstlisting}  
+
+\link{http://www.math.unl.edu/~sdunbar1/Probability/Lessons/MarkovChains/StandardExamples/reflectingbdy.R}{R script for
+  Random Walk with Reflecting Boundaries.}
+
+\begin{lstlisting}[language=R]
+library(markovchain)
+
+N <- 7
+stateNames <- as.character( 0:N )
+transMatrix <- matrix(0, N+1,N+1)
+transMatrix[1,2] <- 1
+transMatrix[N+1, N] <- 1
+for (row in 2:N) {  #row 2 is state 1, row 7 is state 6
+    transMatrix[row, row-1] <- 1/2
+    transMatrix[row, row+1] <- 1/2
+}
+startState <- "3"
+
+reflectingbdy <- new("markovchain", transitionMatrix=transMatrix,
+                 states=stateNames, name="ReflectingBdy")
+print(reflectingbdy)
+
+print( summary(reflectingbdy) )
+
+pathLength <- 10 
+path <- rmarkovchain(n=pathLength,
+                            object = reflectingbdy, t0 = startState)
+cat("A sample starting from ", startState, path, "\n")
+path <- rmarkovchain(n=pathLength,
+                            object = reflectingbdy, t0 = startState)
+cat("Another sample starting from ", startState, path, "\n")
+
+if ( length( transientStates( reflectingbdy) ) == 0 ) {
+    largeN <- 1000; startStable <- 100
+    path <- rmarkovchain(n=largeN,
+                         object = reflectingbdy, t0 = startState)
+    stablePattern <-  path[startStable:largeN]
+    empiricalStable <- rep(0, N+1)
+    for (i in seq_along(stateNames)) { 
+        empiricalStable[i] <-  mean( stablePattern == (i-1) )
+    }
+    theorStable <- steadyStates(reflectingbdy)
+    cat("Empirical stable distribution: ",  empiricalStable, "\n")
+    cat("Theoretical stable distribution: ", theorStable, "\n")
+}
+\end{lstlisting}
+
+\link{http://www.math.unl.edu/~sdunbar1/Probability/Lessons/MarkovChains/StandardExamples/walkcircle.R}{R script for
+  Random Walk on a Circle.}
+
+\begin{lstlisting}[language=R]
+library(markovchain)
+
+N <- 7
+stateNames <- as.character( 0:N )
+transMatrix <- matrix(0, N+1,N+1)
+transMatrix[1,2] <- 1/2; transMatrix[1,N+1] <- 1/2
+transMatrix[N+1, N] <- 1/2; transMatrix[N+1,1] <- 1/2
+for (row in 2:N) {  #row 2 is state 1, row 7 is state 6
+    transMatrix[row, row-1] <- 1/2
+    transMatrix[row, row+1] <- 1/2
+}
+startState <- "3"
+
+walkcircle <- new("markovchain", transitionMatrix=transMatrix,
+                 states=stateNames, name="Walkcircle")
+print(walkcircle)
+
+print( summary(walkcircle) )
+
+pathLength <- 10 
+path <- rmarkovchain(n=pathLength,
+                            object = walkcircle, t0 = startState)
+cat("A sample starting from ", startState, path, "\n")
+path <- rmarkovchain(n=pathLength,
+                            object = walkcircle, t0 = startState)
+cat("Another sample starting from ", startState, path, "\n")
+
+if ( length( transientStates(walkcircle) ) == 0 ) {
+    largeN <- 1000; startStable <- 100
+    path <- rmarkovchain(n=largeN,
+                         object = walkcircle, t0 = startState)
+    stablePattern <-  path[startStable:largeN]
+    empiricalStable <- rep(0, N+1)
+    for (i in seq_along(stateNames)) { 
+        empiricalStable[i] <-  mean( stablePattern == (i-1) )
+    }
+    theorStable <- steadyStates(walkcircle)
+    cat("Empirical stable distribution: ",  empiricalStable, "\n")
+    cat("Theoretical stable distribution: ", theorStable, "\n")
+}
+\end{lstlisting}
+
+
+\link{http://www.math.unl.edu/~sdunbar1/Probability/Lessons/MarkovChains/StandardExamples/ehrenfest1.R}{R script for
+   Ehrenfest Urn Model.}
+
+\begin{lstlisting}[language=R]
+library(markovchain)
+
+N <- 7
+stateNames <- as.character( 0:N )
+transMatrix <- matrix(0, N+1,N+1)
+transMatrix[1,2] <- 1
+transMatrix[N+1, N] <- 1
+for (row in 2:N) {  #row 2 is state 1, row 7 is state 6
+    transMatrix[row, row-1] <- (row-1)/N
+    transMatrix[row,row+1] <- (N-(row-1))/N
+}
+startState <- "3"
+
+ehrenfest1 <- new("markovchain", transitionMatrix=transMatrix,
+                 states=stateNames, name="Ehrenfest1")
+print(ehrenfest1)
+
+print( summary(ehrenfest1) )
+
+pathLength <- 10 
+path <- rmarkovchain(n=pathLength,
+                            object = ehrenfest1, t0 = startState)
+cat("A sample starting from ", startState, path, "\n")
+path <- rmarkovchain(n=pathLength,
+                            object = ehrenfest1, t0 = startState)
+cat("Another sample starting from ", startState, path, "\n")
+
+if ( length( transientStates(ehrenfest1) ) == 0 ) {
+    largeN <- 1000; startStable <- 100
+    path <- rmarkovchain(n=largeN,
+                         object = ehrenfest1, t0 = startState)
+    stablePattern <-  path[startStable:largeN]
+    empiricalStable <- rep(0, N+1)
+    for (i in seq_along(stateNames)) { 
+        empiricalStable[i] <-  mean( stablePattern == stateNames[i] )
+    }
+    theorStable <- steadyStates(ehrenfest1)
+    cat("Empirical stable distribution: ",  empiricalStable, "\n")
+    cat("Theoretical stable distribution: ", theorStable, "\n")
+}
+
+  
+\end{lstlisting}
+
+\link{http://www.math.unl.edu/~sdunbar1/Probability/Lessons/MarkovChains/StandardExamples/ehrenfest2.R}{R script for
+  alternative Ehrenfest Urn Model.}
+
+\begin{lstlisting}[language=R]
+library(markovchain)
+
+N <- 7; p <- 1/2; q <- 1 - p;
+stateNames <- as.character( 0:N )
+transMatrix <- matrix(0, N+1,N+1)
+transMatrix[1,1] <- q
+transMatrix[1,2] <- p
+transMatrix[N+1, N  ] <- q
+transMatrix[N+1, N+1] <- p
+for (row in 2:N) {
+    transMatrix[row, row-1] <- ((N-(row-1))/N)*p
+    transMatrix[row,row] <- ((N-(row-1))/N)*q + ((row-1)/N)*p
+    transMatrix[row,row+1] <- ((row-1)/N)*q
+}
+startState <- "3"
+
+ehrenfest2 <- new("markovchain", transitionMatrix=transMatrix,
+                 states=stateNames, name="Ehrenfest2")
+print(ehrenfest2)
+
+print( summary(ehrenfest2) )
+
+pathLength <- 10 
+path <- rmarkovchain(n=pathLength,
+                            object = ehrenfest2, t0 = startState)
+cat("A sample starting from startState ", startState, path, "\n")
+path <- rmarkovchain(n=pathLength,
+                            object = ehrenfest2, t0 = startState)
+cat("Another sample starting from ", startState, path, "\n")
+
+if ( length( transientStates(ehrenfest2) ) == 0 ) {
+    largeN <- 1000; startStable <- 100
+    path <- rmarkovchain(n=largeN,
+                         object = ehrenfest2, t0 = startState)
+    stablePattern <-  path[startStable:largeN]
+    empiricalStable <- rep(0, N+1)
+    for (i in stateNames) { 
+        empiricalStable[i] <-  mean( stablePattern == stateNames[i] )
+    }
+    theorStable <- steadyStates(ehrenfest2)
+    cat("Empirical stable distribution: ",  empiricalStable, "\n")
+    cat("Theoretical stable distribution: ", theorStable, "\n")
+}
+
+
+  
+\end{lstlisting}
+
+\link{http://www.math.unl.edu/~sdunbar1/Probability/Lessons/MarkovChains/StandardExamples/ehrenfest3.R}{R script for
+  another alternative Ehrenfest Urn Model.}
+
+\begin{lstlisting}[language=R]
+library(markovchain)
+
+N <- 7; p <- 1/2; q <- 1 - p;
+stateNames <- as.character( 0:N )
+transMatrix <- matrix(0, N+1,N+1)
+transMatrix[1,1] <- 1
+transMatrix[N+1, N+1] <- 1
+for (row in 2:N) {
+    transMatrix[row, row-1] <- ((N-(row-1))/N)*p
+    transMatrix[row,row] <- ((N-(row-1))/N)*q + ((row-1)/N)*p
+    transMatrix[row,row+1] <- ((row-1)/N)*q
+}
+startState <- "3"
+
+ehrenfest3 <- new("markovchain", transitionMatrix=transMatrix,
+                 states=stateNames, name="Ehrenfest3")
+print(ehrenfest3)
+
+print( summary(ehrenfest3) )
+
+pathLength <- 10 
+path <- rmarkovchain(n=pathLength,
+                            object = ehrenfest3, t0 = startState)
+cat("A sample starting from ", startState, path, "\n")
+path <- rmarkovchain(n=pathLength,
+                            object = ehrenfest3, t0 = startState)
+cat("Another sample starting from ", startState, path, "\n")
+
+if ( length( transientStates(ehrenfest3) ) == 0 ) {
+    largeN <- 1000; startStable <- 100
+    path <- rmarkovchain(n=largeN,
+                         object = ehrenfest3, t0 = startState)
+    stablePattern <-  path[startStable:largeN]
+    empiricalStable <- rep(0, N+1)
+    for (i in stateNames) { 
+        empiricalStable[i] <-  mean( stablePattern == i )
+    }
+    theorStable <- steadyStates(ehrenfest3)
+    cat("Empirical stable distribution: ",  empiricalStable, "\n")
+    cat("Theoretical stable distribution: ", theorStable, "\n")
+}
+
+
+  
+\end{lstlisting}
+
+\link{http://www.math.unl.edu/~sdunbar1/Probability/Lessons/MarkovChains/StandardExamples/ehrenfest4.R}{R script for
+   yet another alternative Ehrenfest Urn Model.}
+
+\begin{lstlisting}[language=R]
+library(markovchain)
+
+N <- 7
+stateNames <- as.character( 0:N )
+transMatrix <- matrix(0, N+1,N+1)
+transMatrix[1,1] <- 1
+transMatrix[N+1, N+1] <- 1
+for (row in 2:N) {  #row 2 is state 1, row 7 is state 6
+    transMatrix[row, row-1] <- (row-1)*(N-(row-1))/N^2
+    transMatrix[row,row] <- (row-1)^2/N^2 + (N-(row-1))^2/N^2
+    transMatrix[row,row+1] <- (row-1)*(N-(row-1))/N^2
+}
+startState <- "3"
+
+ehrenfest4 <- new("markovchain", transitionMatrix=transMatrix,
+                 states=stateNames, name="Ehrenfest4")
+print(ehrenfest4)
+
+print( summary(ehrenfest4) )
+
+pathLength <- 10 
+path <- rmarkovchain(n=pathLength,
+                     object = ehrenfest4, t0 = startState)
+cat("A sample starting from ", startState, ":", path, "\n")
+path <- rmarkovchain(n=pathLength,
+                     object = ehrenfest4, t0 = startState)
+cat("Another sample starting from ", startState, ":", path, "\n")
+
+if ( length( transientStates(ehrenfest4) ) == 0 ) {
+    largeN <- 1000; startStable <- 100
+    path <- rmarkovchain(n=largeN,
+                         object = ehrenfest4, t0 = startState)
+    stablePattern <-  path[startStable:largeN]
+    empiricalStable <- rep(0, N+1)
+    for (i in seq_along(stateNames)) { 
+        empiricalStable[i] <-  mean( stablePattern == stateNames[i] )
+    }
+    theorStable <- steadyStates(ehrenfest4)
+    cat("Empirical long-time distribution: ",  empiricalStable, "\n")
+    cat("Theoretical stable distribution: ", theorStable, "\n")
+}
+
+
+  
+\end{lstlisting}
+
+% \item[Octave]
+
+% \link{http://www.math.unl.edu/~sdunbar1/    .m}{Octave script for .}
+
+% \begin{lstlisting}[language=Octave]
+
+% \end{lstlisting}
+
+% \item[Perl] 
+
+% \link{http://www.math.unl.edu/~sdunbar1/    .pl}{Perl PDL script for .}
+
+% \begin{lstlisting}[language=Perl]
+
+% \end{lstlisting}
+
+% \item[SciPy] 
+
+% \link{http://www.math.unl.edu/~sdunbar1/    .py}{Scientific Python script for .}
+
+% \begin{lstlisting}[language=Python]
+
+% \end{lstlisting}
+
+\end{description}
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
