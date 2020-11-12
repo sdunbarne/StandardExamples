@@ -1,6 +1,6 @@
 # StandardExamples
 Section 4 of tentative book on theory and examples of Markov Chains 
-1.      A wide variaty of standard examples illustrate Markov chains:
+1.      A wide variety of standard examples illustrate Markov chains:
         sums of independent random variables, random walks on finite and
         infinite state spaces, and urn models.
 2.      Random walks on finite state spaces can have absorbing or
