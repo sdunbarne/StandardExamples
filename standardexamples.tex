@@ -1,0 +1,1033 @@
+%%% -*-LaTeX-*-
+%%% standardexamples.tex.orig
+%%% Prettyprinted by texpretty lex version 0.02 [21-May-2001]
+%%% on Fri Apr 22 08:10:06 2022
+%%% for Steve Dunbar (sdunbar@family-desktop)
+
+\documentclass[12pt]{article}
+
+\input{../../../../etc/macros}
+\input{../../../../etc/mzlatex_macros}
+%% \input{../../../../etc/pdf_macros}
+
+\bibliographystyle{plain}
+
+\begin{document}
+
+\myheader \mytitle
+
+\hr
+
+\sectiontitle{Standard Examples of Markov Chains}
+
+\hr
+
+\usefirefox
+
+\hr
+
+% \visual{Study Tip}{../../../../CommonInformation/Lessons/studytip.png}
+% \section*{Study Tip}
+
+% \hr
+
+\visual{Rating}{../../../../CommonInformation/Lessons/rating.png}
+\section*{Rating} %one of
+% Everyone: contains no mathematics.
+% Student: contains scenes of mild algebra or calculus that may require guidance.
+Mathematically Mature:  may contain mathematics beyond calculus with
+proofs.  % Mathematicians Only: prolonged scenes of intense rigor.
+
+\hr
+
+\visual{Section Starter Question}{../../../../CommonInformation/Lessons/question_mark.png}
+\section*{Section Starter Question}
+
+Give an example from elementary probability of a simple Markov chain.
+
+\hr
+
+\visual{Key Concepts}{../../../../CommonInformation/Lessons/keyconcepts.png}
+\section*{Key Concepts}
+
+\begin{enumerate}
+    \item
+        A wide variety of standard examples illustrate Markov chains:
+        sums of independent random variables, random walks on finite and
+        infinite state spaces, and urn models.
+    \item
+        Random walks on finite state spaces can have absorbing or
+        reflecting boundaries, or even circular boundaries.  Different
+        boundary conditions lead to different Markov chains.
+    \item
+        The physicist P. Ehrenfest proposed an urn model for statistical
+        mechanics and kinetic theory.  The motivation is diffusion
+        through a membrane.  Two urns labeled \( A \) and \( B \),
+        contain a total of \( N \) balls and the state is the number of
+        balls in one urn.  Different urn and ball selections lead to
+        different Markov chains.
+\end{enumerate}
+
+\hr
+
+\visual{Vocabulary}{../../../../CommonInformation/Lessons/vocabulary.png}
+\section*{Vocabulary}
+\begin{enumerate}
+    \item
+        In \defn{random walk with boundaries} the state space is the
+        finite set of integers \( \set{0, 1, 2, 3 \dots, n} \).  A
+        particle at site \( i \) can stay at \( i \) with probability \(
+        r_i \) or move to adjacent site \( i+1 \) with probability \( p_i
+        \) and to adjacent site \( i-1 \) with probability \( q_i \)
+        with \( p_i+r_i+q_i = 1 \).  The transitions at the boundaries \(
+        0 \) and \( n \) get special consideration.
+    \item
+        In a \defn{random walk with absorbing boundaries}, \( r_0 = r_n
+        = 1 \) so the particle reaches sites \( 0 \) or \( n \), then it
+        stays at that site with probability \( 1 \).
+    \item
+        In a \defn{random walk with reflecting boundaries} if the
+        particle reaches sites \( 0 \) or \( n \), then at the next step
+        it is at \( 1 \) or \( n-1 \) respectively with probability \( 1
+        \).
+    \item
+        In a \defn{random walk on a circle} if the particle reaches site
+        \( 0 \), then at the next step it is at \( n \) or \( 1 \) with
+        probability \( q \) or \( p \) respectively.  If the particle
+        reaches site \( n \), then at the next step it is at \( n-1 \)
+        or \( 1 \) with probability \( q \) or \( p \) respectively.
+    \item
+        In \defn{unbiased random walk on the integers}, also called
+        symmetric random walk, the state space is the infinite set of
+        integers \( \Integers \).  A particle at site \( i \) moves to
+        adjacent site \( i+1 \) with probability \( 1/2 \) and to
+        adjacent site \( i-1 \) with probability \( 1/2 \).
+    \item
+        In \defn{biased random walk on the integers} the state space is
+        the infinite set of integers \( \Integers \).  A particle at
+        site \( i \) moves to adjacent site \( i+1 \) with probability \(
+        p \) and to adjacent site \( i-1 \) with probability \( q \)
+        with \( p \ne q \) and \( p+q = 1 \).
+    \item
+        A \defn{graph} is a finite or infinite set of nodes, also called
+        vertices, \( \set{v_1, v_2, \dots, v_n} \), and an associated
+        collection of edges \( \set{v_{ij}, 1 \le i,j \le n} \).  There
+        need not be an edge between any two vertices, but if there is a
+        connection between vertices \( v_i \) and \( v_j \), then \( v_j
+        \) is in the neighborhood \( N(v_i) \) of \( v_i \).
+    \item
+        In the more general \defn{random walk on a graph} a particle at
+        vertex \( v_i \) will move to a vertex \( v_j \) in the
+        neighborhood \( N(v_i) \) with probability \( p_{ij} \) and may
+        stay at \( v_i \) with probability \( p_{ii} \), where \( \sum_
+        {k \in [\set{i} \union N(v_i)]} p_{ik} = 1 \).
+    \item
+        In the \defn{Ehrenfest urn model} a ball is selected at random
+        from one of two urns with all selections equally likely, and
+        moved from the urn it is in to the other urn.  The state from \(
+        0 \) to \( N \) at each time is the number of balls in a fixed
+        urn.
+\end{enumerate}
+
+\hr
+
+\section*{Notation}
+\begin{enumerate}
+    \item
+        \( i, j, l \) -- arbitrary states of the Markov chain
+    \item
+        \( \xi \) -- a discrete-valued random variable with possible
+        values as the nonnegative integers \( \Prob{\xi=i} = p_i \)
+    \item
+        \( \xi_1, \xi_2, \xi_3, \dots \) -- independent observations of \(
+        \xi \)
+    \item
+        \( X_n \) -- Markov chain with transition probability matrix \(
+        P \)
+    \item
+        successive partial sums \( \eta_n \) of the random variables of
+        the independent observations of the \( \xi_i \)
+    \item
+        \( p_i, q_i, r_i \) -- A particle at site \( i \) can stay at \(
+        i \) with probability \( r_i \) or move to adjacent site \( i+1 \)
+        with probability \( p_i \) and to adjacent site \( i-1 \) with
+        probability \( q_i \) with \( p_i+r_i+q_i = 1 \).
+    \item
+        \( p, q = 1-p \) -- simple Bernoulli probabilities
+    \item
+        \( n, t \) -- time steps or periods of the Markov chain
+    \item
+        \( \pi \) -- stationary distribution for a Markov chain
+    \item
+        \( k \) -- related to the number of states of the Markov chain (\(
+        k + 1 \) states if there is a \( 0 \) state)
+\end{enumerate}
+
+\visual{Mathematical Ideas}{../../../../CommonInformation/Lessons/mathematicalideas.png}
+\section*{Mathematical Ideas}
+
+\subsection*{State Homogeneous Markov Chains}
+
+\subsubsection*{Simple State Homogeneous Markov Chain}
+
+Let \( \xi \) denote a discrete-valued random variable with possible
+values as the nonnegative integers \( \Prob{\xi=i} = p_i \), where \( p_i
+\ge 0 \) and \( \sum_{i=1}^{\infty} p_i = 1 \).  Let \( \xi_1, \xi_2,
+\xi_3, \dots \) be independent observations of \( \xi \).  Then consider
+the process \( X_i \), \( n = 1, 2, 3, \dots \) defined by \( X_n = \xi_n
+\).  The transition probability matrix of this state homogeneous Markov
+chain is schematically%
+\index{Markov chain!state homogeneous}
+\[
+    P =
+    \begin{pmatrix}
+        p_1 & p_2 & p_3 & \dots \\
+        p_1 & p_2 & p_3 & \dots \\
+        p_1 & p_2 & p_3 & \dots \\
+        \vdots & \vdots & \vdots & \ddots
+    \end{pmatrix}
+    .
+\] If \( p_i = 0 \) for \( i > k \), then the state space of the Markov
+chain is finite, with corresponding \( k \times k \) finite transition
+probability matrix.
+
+In this example, make the sensible assumption that \( 0 < p_i < 1 \) for
+the set of states, either finite or infinite, so that only states with a
+probability of appearing are considered.  The stationary distribution is
+\( p_i > 0 \).  Note that \( P^n = P \).  With the assumption, this
+Markov chain is
+\begin{itemize}
+    \item
+        ergodic,
+    \item
+        regular,
+    \item
+        aperiodic,
+    \item
+        each state is accessible and all states communicate,
+    \item
+        recurrent,
+    \item
+        has no absorbing states.
+\end{itemize}
+This Markov chain is equivalent to independent samples from the
+distribution \( \Prob{\xi=i} = p_i \).
+
+\subsubsection*{Sums of Independent Random Variables as Markov Chains}
+
+Another important Markov chain comes from successive partial sums \(
+\eta_n \) of the random variables of the independent observations of the
+\( \xi_i \)
+\[
+    \eta_n = \xi_1 + \xi_2 + \xi_3 + \cdots + \xi_n
+\] with \( \eta_0 = 0 \) by definition.%
+\index{sums of independent random variables}
+\index{Markov chain!sums of independent random variables}
+\index{sums of independent random variables!as Markov chain}
+The entries of the probability transition matrix are defined by
+\begin{align*}
+    &\Prob{X_{n+1} = j \given X_n = i} \\
+    & = \Prob{\xi_1 + \xi_2 + \xi_3 + \cdots + \xi_n + \xi_{n+1} = j
+    \given \xi_1 + \xi_2 + \xi_3 + \cdots + \xi_n = i} \\
+    & = \Prob{\xi_{n+1} = j-i}
+\end{align*}
+assuming the independence of the \( \xi_i \).  Schematically the
+probability transition matrix is
+\[
+    P =
+    \begin{pmatrix}
+        p_1 & p_2 & p_3 & p_4 & \dots \\
+        0 & p_1 & p_2 & p_3 & \dots \\
+        0 & 0 & p_1 & p_2 & \dots \\
+        \vdots & \vdots & \vdots & \vdots & \ddots
+    \end{pmatrix}
+    .
+\]
+
+If the random variables \( \xi \) assumes both positive and negative
+integers, then the possible values of the partial sums \( \eta_n \) will
+be contained in the set of all integers.  Then let the state space be \(
+\Integers \).  Letting \( \Prob{\xi = i} = p_{i} \), \( i \in \Integers \),
+with \( p_i \ge 0 \), \( \sum_{i=-\infty}^{\infty} p_i = 1 \).  Then
+schematically the probability transition matrix is
+\[
+    P =
+    \begin{pmatrix}
+        \vdots & \vdots & \vdots & \vdots \vdots & \vdots & \vdots &
+        \vdots \\
+        \cdots & p_{-1} & p_0 & p_1 & p_2 & p_3 & p_4 & \cdots \\
+        \cdots & p_{-2} & p_{-1} & p_0 & p_1 & p_2 & p_3 & \cdots \\
+        \cdots & p_{-3} & p_{-2} & p_{-1} & p_0 & p_1 & p_2 & \cdots \\
+        \vdots & \vdots & \vdots & \vdots \vdots & \vdots & \vdots &
+        \vdots
+    \end{pmatrix}
+    .
+\]
+
+This Markov chain is quite general and so special cases will be
+considered as examples of the various characteristics of Markov chains.
+
+\subsection*{Random Walks as Markov Chains}
+
+\subsubsection*{Random Walk with Absorbing Boundaries}
+
+In \defn{random walk with boundaries} the state space is the finite set
+of integers \( \set{0, 1, 2, 3 \dots, k} \).%
+\index{random walk! with boundaries}
+A particle at site \( i \) can stay at \( i \) with probability \( r_i \)
+or move to adjacent site \( i+1 \) with probability \( p_i \) and to
+adjacent site \( i-1 \) with probability \( q_i \) with \( p_i+r_i+q_i =
+1 \).  The transitions at the boundaries \( 0 \) and \( k \) get special
+consideration.  The transition probability matrix in general is
+\[
+    P =
+    \begin{pmatrix}
+        r_0 & p_0 & 0 & 0 & 0 & \cdots & 0 & 0 & 0 \\
+        q_1 & r_1 & p_1 & 0 & 0 & \cdots & 0 & 0 & 0 \\
+        0 & q_2 & r_2 & p_2 & 0 & \cdots & 0 & 0 & 0 \\
+        0 & 0 & q_3 & r_3 & p_3 & \cdots & 0 & 0 & 0 \\
+        \vdots & \vdots & \vdots & \vdots & \vdots & \ddots & \vdots
+        \vdots & \vdots \\
+        0 & 0 & 0 & 0 & 0 & \cdots & 0 & q_k & r_k \\
+    \end{pmatrix}
+    .
+\]
+
+If \( r_0 = r_k = 1 \) the particle reaches sites \( 0 \) or \( k \),
+then it stays at that site with probability \( 1 \).  This is a \defn{random
+walk with absorbing boundaries}.  In a common%
+\index{random walk! with absorbing boundaries}
+\index{Markov chain ! random walk with absorbing boundaries}
+special case, the transition probabilities do not depend on \( i \) and \(
+r_i = 0 \).  The transition probability matrix is
+\[
+    P =
+    \begin{pmatrix}
+        1 & 0 & 0 & 0 & 0 & \cdots & 0 & 0 & 0 \\
+        q & 0 & p & 0 & 0 & \cdots & 0 & 0 & 0 \\
+        0 & q & 0 & p & 0 & \cdots & 0 & 0 & 0 \\
+        0 & 0 & q & 0 & p & \cdots & 0 & 0 & 0 \\
+        \vdots & \vdots & \vdots & \vdots & \vdots & \ddots & \vdots &
+        \vdots & \vdots \\
+        0 & 0 & 0 & 0 & 0 & \cdots & 0 & 0 & 1 \\
+    \end{pmatrix}
+    .
+\] This is also the Markov chain for the gambler's ruin.%
+\index{gambler's ruin}
+\index{Markov chain!gambler's ruin}
+
+This Markov chain is not ergodic because of the absorbing boundaries. In
+the case that \( r_i = 0 \), the period of Markov chain is \( 2 \). If \(
+r_i = 0 \) the chain is not regular.  All states are accessible from
+states \( i \) for \( 0 < i < k \), but because of the absorbing
+boundaries, not all states communicate.  The transient states are \( 1,
+2, \dots, k-1 \) and the absorbing states are \( 0 \) and \( k \).
+Therefore, it does not make sense to consider any stable distributions.
+
+\subsubsection*{Random Walk with Reflecting Boundaries}
+
+In a \defn{random walk with reflecting boundaries} the state space is
+the finite set of integers \( \set{0, 1, 2, 3 \dots, k} \).  A particle
+at%
+\index{random walk! with reflecting boundaries}
+\index{Markov chain ! random walk with reflecting boundaries}
+site \( i \) with \( 1 < i < k-1 \) moves to adjacent site \( i+1 \)
+with probability \( p \) and to adjacent site \( i-1 \) with probability
+\( q \) with \( p+q = 1 \).  If the particle reaches sites \( 0 \) or \(
+k \), then at the next step it is at \( 1 \) or \( n-1 \) respectively
+with probability \( 1 \).  The transition probability matrix is
+\[
+    P =
+    \begin{pmatrix}
+        0 & 1 & 0 & 0 & 0 & \cdots & 0 & 0 & 0 \\
+        q & 0 & p & 0 & 0 & \cdots & 0 & 0 & 0 \\
+        0 & q & 0 & p & 0 & \cdots & 0 & 0 & 0 \\
+        \vdots & \vdots & \vdots & \vdots & \vdots & \ddots & \vdots &
+        \vdots & \vdots \\
+        0 & 0 & 0 & 0 & 0 & \cdots & 0 & 1 & 0 \\
+    \end{pmatrix}
+    .
+\]
+
+For this transition probability matrix \( P \) there is a probability
+distribution \( \pi \) such that \( \pi P = \pi \).  However it is not
+strictly true that the Markov chain has a stationary distribution
+because the chain has period \( 2 \).  However, this can be fixed by
+embedding this random walk in a \emph{lazy random walk}%
+\index{lazy random walk}
+sequence \( X_0, X_1, \dots, X_{n-1}m X_n, \dots \) where given \( X_{n-1}
+\), first choose to remain at \( X_{n-1} \) with probability \( \frac{1}
+{2} \).  Alternatively, with probability \( \frac{1}{2} \) choose to
+move to \( X_n \) selected with probability \( q \) and \( p \) from the
+left and right nodes adjacent to \( x_{n-1} \).  This Markov chain is
+ergodic.  The chain is periodic with period \( 2 \) so is not regular.
+All states are accessible and all states communicate.  This Markov chain
+has no transient states and all states are recurrent.  The Markov chain
+has no absorbing states.
+
+\subsubsection*{Random Walk on a Circle}
+
+In \defn{random walk on a circle} the state space is the finite set of
+integers \( \set{0, 1, 2, 3 \dots, k} \).  A particle at%
+\index{random walk! on a circle}
+\index{Markov chain ! random walk on a circle}
+site \( i \) with \( 1 < i < k-1 \) moves to adjacent site \( i+1 \)
+with probability \( p \) and to adjacent site \( i-1 \) with probability
+\( q \) with \( p+q = 1 \).  If the particle reaches sites \( 0 \), then
+at the next step it is at \( k \) or \( 1 \) with probability \( q \) or
+\( p \) respectively.  If the particle reaches sites \( k \), then at
+the next step it is at \( k-1 \) or \( 1 \) with probability \( q \) or \(
+p \) respectively.  The transition probability matrix is
+\[
+    P =
+    \begin{pmatrix}
+        0 & p & 0 & 0 & 0 & \cdots & 0 & 0 & q \\
+        q & 0 & p & 0 & 0 & \cdots & 0 & 0 & 0 \\
+        0 & q & 0 & p & 0 & \cdots & 0 & 0 & 0 \\
+        \vdots & \vdots & \vdots & \vdots & \vdots & \ddots & \vdots &
+        \vdots & \vdots \\
+        p & 0 & 0 & 0 & 0 & \cdots & 0 & q & 0 \\
+    \end{pmatrix}
+    .
+\] This is also a random walk with state space \( \Integers_{k+1} \).
+
+This Markov chain has a stationary distribution
+\[
+    (1/(k+1), 1/(k+1),\dots, 1/(k+1))
+\] (subject to the embedding into a lazy random walk as in the previous
+example.) This Markov chain is ergodic.  The chain is periodic with
+period \( 2 \) so it is not regular.  All states are accessible and all
+states communicate.  This Markov chain has no transient states and all
+states are recurrent.  This Markov chain has no absorbing states.
+
+\subsubsection*{Unbiased Walk on Integers}
+
+In \defn{unbiased random walk on the integers}, also called symmetric%
+\index{unbiased random walk on the integers}
+\index{random walk! unbiased}
+\index{Markov chain ! unbiased walk on integers}
+random walk, the state space is the infinite set of integers \(
+\Integers \).  A particle at site \( i \) with \( i \) moves to adjacent
+site \( i+1 \) with probability \( 1/2 \) and to adjacent site \( i-1 \)
+with probability \( 1/2 \).  The transition probability is
+\[
+    p_{ij} =
+    \begin{cases}
+        1/2 & j = i-1 \\
+        1/2 & j = i+1 \\
+        0 & j \ne i-1, i+1 \\
+    \end{cases}
+    .
+\]
+
+Because this Markov chain has an infinite state space, it does not make
+sense to consider a stable distribution.  This Markov chain is ergodic.
+The chain is periodic with period \( 2 \) so it is not regular.  All
+states are accessible and all states communicate.  It is a deep theorem
+that the Markov chain has no transient states and all states are
+recurrent, see Theorem 7 and the remarks following Theorem 7 in \link{Recurrence}
+{http://www.math.unl.edu/~sdunbar1/ProbabilityTheory/Lessons/BernoulliTrials/Recurrence/recurrence.html}.
+Therefore, this is an example of an infinite state space Markov chain
+that is ergodic and is also recurrent.  This Markov chain has no
+absorbing states.
+
+\subsubsection*{Biased Walk on Integers}
+
+In \defn{biased random walk on the integers} the state space is the%
+\index{unbiased random walk on the integers}
+\index{random walk! biased}
+\index{Markov chain ! biased walk on integers}
+infinite set of integers \( \Integers \).  A particle at site \( i \)
+with \( i \) moves to adjacent site \( i+1 \) with probability \( p \)
+and to adjacent site \( i-1 \) with probability \( q \) with \( p \ne q \)
+and \( p+q = 1 \).  The transition probability is
+\[
+    p_{ij} =
+    \begin{cases}
+        p & j = i-1 \\
+        q & j = i+1 \\
+        0 & j \ne i-1, i+1 \\
+    \end{cases}
+    .
+\]
+
+Because this Markov chain has an infinite state space, it does not make
+sense to consider a stable distribution.  This Markov chain is ergodic.
+The chain is periodic with period \( 2 \) so it is not regular.  All
+states are accessible and all states communicate.  It is a substantial
+theorem that all states are transient states and no states are
+recurrent, see Theorem 7 and the remarks following Theorem 7 in \link{Recurrence}
+{http://www.math.unl.edu/~sdunbar1/ProbabilityTheory/Lessons/BernoulliTrials/Recurrence/recurrence.html}.
+Therefore, this is an example of an infinite state space Markov chain
+that is ergodic but is not recurrent.  This shows that ergodicity and
+recurrence are different concepts.  This Markov chain has no absorbing
+states.
+
+\subsubsection*{Random Walks on Graphs}
+
+Each of these examples of a Markov chain is a specific case of a more
+general \defn{random walk on a graph}.  A \defn{graph} is a finite or%
+\index{random walk! on graphs}
+\index{Markov chain ! random walk on a graph}
+infinite set of nodes, also called vertices, \( \set{v_1, v_2, \dots, v_k}
+\), and an associated collection of edges \( \set{v_{ij}, 1 \le i,j \le
+n} \).  There need not be an edge between two vertices.  If there is a
+connection between vertices \( v_i \) and \( v_j \), then \( v_j \) is
+in the neighborhood \( N(v_i) \) of \( v_i \).%
+\index{graph}
+\index{graph!neighborhood}
+A particle at vertex \( v_i \) will move to a vertex \( v_j \) in the
+neighborhood \( N(v_i) \) with probability \( p_{ij} \) and may stay at \(
+v_i \) with probability \( p_{ii} \), where \( \sum_{j \in [\set{i}
+\union N(v_i)]} p_{ij} = 1 \).
+
+\begin{example}
+    Consider the \( 3 \times 3 \) square lattice graph in Figure~%
+    \ref{fig:standardexamples:sqlattice}.  The graph has \( 9 \)
+    vertices with \( 10 \) edges between nearest lattice neighbors.  If
+    a vertex has \( n \) edges then the probability of moving to a
+    neighboring edge or staying at the vertex is \( \frac{1}{n+1} \)
+    uniformly. The random walk on this graph is often colorfully
+    characterized as a frog hopping among lily pads or a bug leaping
+    among plants.  The transition probability matrix for this graph
+    random walk is
+    \[
+        \begin{pmatrix}
+            1/3 & 1/3 & 0 & 1/3 & 0 & 0 & 0 & 0 & 0 \\
+            1/4 & 1/4 & 1/4 & 0 & 1/4 & 0 & 0 & 0 & 0 \\
+            0 & 1/3 & 1/3 & 0 & 0 & 1/3 & 0 & 0 & 0 \\
+            1/4 & 0 & 0 & 1/4 & 1/4 & 0 & 1/4 & 0 & 0 \\
+            0 & 1/5 & 0 & 1/5 & 1/5 & 1/5 & 0 & 1/5 & 0 \\
+            0 & 0 & 1/4 & 0 & 1/4 & 1/4 & 0 & 0 & 1/4 \\
+            0 & 0 & 0 & 1/3 & 0 & 0 & 1/3 & 1/3 & 0 \\
+            0 & 0 & 0 & 0 & 1/4 & 0 & 1/4 & 1/4 & 1/4 \\
+            0 & 0 & 0 & 0 & 0 & 1/3 & 0 & 1/3 & 1/3
+        \end{pmatrix}
+        .
+    \]
+
+    This Markov chain has a stationary distribution
+    \[
+        \pi = (\frac{1}{11}, \frac{4}{33}, \frac{1}{11}, \frac{4}{33},
+        \frac{5}{33}, \frac{4}{33}, \frac{1}{11}, \frac{4}{33}, \frac{1}
+        {11}).
+    \] This Markov chain is ergodic.  The chain is aperiodic.  All
+    states are accessible and all states communicate.  This Markov chain
+    has no transient states and all states are recurrent.  This Markov
+    chain has no absorbing states.
+
+    \begin{figure}
+        \centering
+\begin{asy}
+size(5inches);
+
+real myfontsize = 12;
+real mylineskip = 1.2*myfontsize;
+pen mypen = fontsize(myfontsize, mylineskip);
+defaultpen(mypen);
+
+real marge=1mm;
+pair z1=(0, 2), z2=(1, 2), z3=(2, 2);
+pair z4=(0, 1), z5=(1, 1), z6=(2, 1);
+pair z7=(0, 0), z8=(1, 0), z9=(2, 0);
+
+transform r=scale(1.0);
+
+object state1=draw("1",ellipse,z1,marge),
+state2=draw("2",ellipse,z2,marge),
+state3=draw("3",ellipse,z3,marge),
+state4=draw("4",ellipse,z4,marge),
+state5=draw("5",ellipse,z5,marge),
+state6=draw("6",ellipse,z6,marge),
+state7=draw("7",ellipse,z7,marge),
+state8=draw("8",ellipse,z8,marge),
+state9=draw("9",ellipse,z9,marge);
+
+add(new void(picture pic, transform t) {
+    draw(pic, point(state1,E,t)--point(state2,W,t));
+    draw(pic, point(state1,S,t)--point(state4,N,t));
+});
+
+add(new void(picture pic, transform t) {
+    draw(pic, point(state2,E,t)--point(state3,W,t));
+    draw(pic, point(state2,S,t)--point(state5,N,t));
+});
+
+add(new void(picture pic, transform t) {
+    draw(pic, point(state3,S,t)--point(state6,N,t));
+});
+
+add(new void(picture pic, transform t) {
+    draw(pic, point(state4,E,t)--point(state5,W,t));
+    draw(pic, point(state4,S,t)--point(state7,N,t));
+});
+
+add(new void(picture pic, transform t) {
+    draw(pic, point(state5,E,t)--point(state6,W,t));
+    draw(pic, point(state5,S,t)--point(state8,N,t));
+});
+
+add(new void(picture pic, transform t) {
+    draw(pic, point(state5,E,t)--point(state6,W,t));
+    draw(pic, point(state5,S,t)--point(state8,N,t));
+});
+
+add(new void(picture pic, transform t) {
+    draw(pic, point(state6,S,t)--point(state9,N,t));
+});
+
+add(new void(picture pic, transform t) {
+    draw(pic, point(state7,E,t)--point(state8,W,t));
+});
+
+add(new void(picture pic, transform t) {
+    draw(pic, point(state8,E,t)--point(state9,W,t));
+});
+\end{asy}
+        \caption{A $3 \times 3$ square lattice graph with uniform
+        transition probabilities.}%
+        \label{fig:standardexamples:lattice3x3}
+    \end{figure}
+
+    The stationary distribution \( \pi \) is unique and the chain
+    converges to \( \pi \) as \( n \to \infty \).  Later sections will
+    use this Markov chain as an example about quantitative rates of
+    convergence, that is, how large \( n \) must be to make the chain
+    sufficiently close to \( \pi \).
+\end{example}
+
+\subsection*{Urn Models}
+
+\subsubsection*{Ehrenfest Urn Model}
+
+The physicist P. Ehrenfest proposed the following model for statistical
+mechanics and kinetic theory.  The motivation is diffusion through a
+membrane.  Two urns labeled \( A \) and \( B \) contain a total of \( k \)
+balls.  In the \defn{Ehrenfest urn model} a%
+\index{Ehrenfest urn model}
+\index{Markov chain ! Ehrenfest urn model}
+\index{urn model}
+ball is selected at random with all selections equally likely, and moved
+from the urn it is in to the other urn.  The state at each time is the
+number of balls in the urn \( A \), from \( 0 \) to \( k \).  Then the
+transition probability matrix is
+\[
+    P =
+    \begin{pmatrix}
+        0 & 1 & 0 & 0 & \cdots & 0 & 0 \\
+        \frac{1}{k} & 0 & 1-\frac{1}{k} & 0 & \cdots & 0 & 0 \\
+        0 & \frac{2}{k} & 0 & 1-\frac{2}{k} & \cdots & 0 & 0 \\
+        \vdots & \vdots & \vdots & \vdots & \ddots& \vdots & \vdots \\
+        0 & 0 & 0 & 0 & \cdots & 0 & 1/k \\
+        0 & 0 & 0 & 0 & \cdots & 1 & 0 \\
+    \end{pmatrix}
+    .
+\] The balls fluctuate between the two containers with a drift from the
+one with the larger number of balls to the one with the smaller numbers.
+
+A stationary distribution for this Markov chain has entry \( \pi_i =
+\binom{k}{i}/2^k \) (subject to the embedding into a lazy Markov chain
+as in the previous examples.).  (See the exercises.) This is the
+binomial distribution on \( k \), so that for large \( k \), this can be
+approximated with the normal distribution.  This conclusion is plausible
+given the physical origin of the Markov chain as a model for diffusion.
+This Markov chain is ergodic.  All states are accessible and all states
+communicate.  The chain is periodic with period \( 2 \) so it is not
+regular.  All states are recurrent with no transient states.  This
+Markov chain has no absorbing states.
+
+\subsubsection*{An Alternate Ehrenfest Urn Model}
+% Karlin and Taylor, Chapter 2, Problem 2 (a), page 74
+
+Two urns labeled \( A \) and \( B \), contain a total of \( k \) balls.
+A ball is selected at random with all selections equally likely.  Then
+an urn is selected, urn \( A \) with probability \( p \) and urn \( B \)
+with probability \( q = 1-p \) and the ball is moved to that urn.  The
+state at each time is the number of balls in the urn \( A \), from \( 0 \)
+to \( N \).  Then the transition probability matrix is
+\[
+    P =
+    \begin{pmatrix}
+        q & p & 0 & 0 & \cdots & 0 & 0 \\
+        \frac{1}{k} q & \frac{1}{k}p + \left( 1-\frac{1}{k} \right) q &\left
+        (1-\frac{1}{k} \right) p & 0 & \cdots & 0 & 0 \\
+        0 & \frac{2}{k} q &\frac{2}{k} p + \left( 1-\frac{2}{k} \right)
+        q &\left( 1-\frac{2}{k} \right) p & \ dots & 0 & 0 \\
+        0 & 0 & \frac{3}{k} q & \frac{3}{k} p + \left( 1-\frac{3}{k}
+        \right) q & \cdots & 0 & 0 \\
+        \vdots & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+        0 & 0 & 0 & 0 & \cdots & q & p \\
+    \end{pmatrix}
+    .
+\]
+
+A stationary distribution for this Markov chain exists, but depends on \(
+p \), \( i \), and \( k \) in a more complicated relationship than in
+the previous example.  This Markov chain is ergodic.  All states are
+accessible and all states communicate.  The chain is periodic with
+period \( 1 \) so it is regular.  All states are recurrent and there are
+no transient states.  This Markov chain has no absorbing states.
+
+\subsubsection*{Another Ehrenfest Urn Model}
+% Karlin and Taylor, Chapter 2, Problem 2 (b), page 74
+
+Two urns labeled \( A \) and \( B \) contain a total of \( k \) balls.
+At time \( t \) there \( j \) balls in urn \( A \).  At time \( t + 1 \)
+an urn is selected, urn \( A \) with probability \( j/k \) and urn \( B \)
+with probability \( (k-j)/k \).  Then independently a ball is selected
+from urn \( A \) with probability \( p \) or from urn \( B \) with
+probability \( q = 1-p \) and placed in the previously selected urn.
+The state at each time is the number of balls in the urn \( A \), from \(
+0 \) to \( k \).  Then the transition probability matrix is
+\[
+    P =
+    \begin{pmatrix}
+        1 & 0 & 0 & 0 & \cdots & 0 & 0 \\
+        \frac{k-1}{k} p & \frac{k-1}{k} q + \left( \frac{1}{k} \right) p
+        & \left( \frac{1}{k} \right) q & 0 & \cdots & 0 & 0 \\
+        0 & \frac{k-2}{k} p & \left( 1-\frac{2}{k}\right) q + \frac{2}{k}
+        p & \left( \frac{2}{k} \right) p & \cdots & 0 & 0 \\
+        0 & 0 & \frac{k-3}{k} p & \left( \frac{k-3}{k}\right) q + \frac{3}
+        {k} p & \cdots & 0 & 0 \\
+        \vdots & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+        0 & 0 & 0 & 0 & \cdots & 0 & 1 \\
+    \end{pmatrix}
+    .
+\]
+
+This Markov chain is not ergodic.  States \( 1 \) through \( k-1 \)
+communicate while states \( 0 \) and \( k \) are absorbing.  States \( 1
+\) to \( k-1 \) are transient states.  The chain is periodic with period
+\( 1 \).
+
+\subsubsection*{Yet Another Generalized Ehrenfest Urn Model}
+% Karlin and Taylor, Chapter 2, Problem 2 (c), page 74
+
+Two urns labeled \( A \) and \( B \), contain a total of \( k \) balls.
+At time \( t \) there \( k \) balls in urn \( A \).  At time \( t + 1 \)
+an urn is selected, urn \( A \) with probability \( k/k \) and urn \( B \)
+with probability \( (k-j)/k \).  Then independently a ball is selected
+from urn \( A \) with probability \( j/k \) or from urn \( B \) with
+probability \( (k-j)/k \) and placed in the previously selected urn. The
+state at each time is the number of balls in the urn \( A \), from \( 0 \)
+to \( k \).  Then the transition probability matrix is
+\[
+    P =
+    \begin{pmatrix}
+        1 & 0 & 0 & 0 & \cdots & 0 & 0 \\
+        \frac{1 \cdot(k-1)}{k^2} & \frac{1^2}{k^2} +\frac{(k-1)^2}{k^2}
+        & \frac{(k-1) \cdot 2 }{k} & 0 & \cdots & 0 & 0 \\
+        0 & \frac{2 \cdot (k-2)}{k} & \frac{2^2}{k^{2}} + \frac{(k-2)^2}
+        {k^2} & \frac{(k-2) \cdot 2}{k^{2}} & \cdots & 0 & 0 \\
+        0 & 0 & \frac{3 \cdot (k-3)}{k^2} & \frac{3^2}{k^{2}} + \frac{(k-3)^2}
+        {k^2} & \cdots & 0 & 0 \\
+        \vdots & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+        0 & 0 & 0 & 0 & \cdots & 0 & 1 \\
+    \end{pmatrix}
+    .
+\]
+
+This Markov chain is not ergodic.  States \( 1 \) through \( k-1 \)
+communicate while states \( 0 \) and \( k \) are absorbing.  States \( 1
+\) to \( k-1 \) are transient states.  The chain is periodic with period
+\( 1 \).
+
+\visual{Section Starter Question}{../../../../CommonInformation/Lessons/question_mark.png}
+\section*{Section Ending Answer}
+
+A standard example from elementary probability theory that is also a
+Markov chain is the sequence of partial sums of a sequence of
+independent identically distributed random variables.  This has the
+natural interpretation as a random walk, also a simple example of a
+Markov chain.
+
+\subsection*{Sources} This section is adapted from:  \booktitle{A First
+Course in Stochastic Processes}, by S. Karlin and H. Taylor, Chapter 2,
+pages 45--80,
+\cite{karlin75}; with more information and ideas from \booktitle{Problems
+in Probability Theory, Mathematical Statistics and Theory of Random
+Functions} by A. A. Svesnikov, Chapter VIII, pages 231--274,
+\cite{svesnikov68}
+
+\hr
+
+\visual{Algorithms, Scripts, Simulations}{../../../../CommonInformation/Lessons/computer.png}
+\section*{Algorithms, Scripts, Simulations}
+
+\subsection*{Algorithm}
+
+\begin{algorithm}[H]
+    \DontPrintSemicolon
+    \KwData{State names and probability transition matrix}
+    \KwResult{Information about a simple Markov chain}
+    \BlankLine
+    \emph{Initialization and sample paths}\;
+    Load Markov chain library\;
+    Set state names, set transition probability matrix, set start
+    state\;
+    Set an example length and create a sample path of example length\;
+    Create a second sample path of example length\;
+    \BlankLine
+    \emph{Simulation of stationary distribution and comparison to theoretical}\;
+    Set a long path length, and a transient time\;
+    Create a long sample path\;
+    Slice the long sample path from the transient time to the end\;
+    In the slice count the appearance of each state\;
+    Store in an empirical array\;
+    Compute the theoretical stable array\;
+
+    \KwRet{Stable distribution and theoretical stable distribution}
+    \caption{Markov chain simulation.}
+\end{algorithm}
+\subsection*{Scripts}
+
+\input{standardexamples_scripts}
+
+\hr
+
+\visual{Problems to Work}{../../../../CommonInformation/Lessons/solveproblems.png}
+\section*{Problems to Work for Understanding}
+
+\renewcommand{\theexerciseseries}{}
+\renewcommand{\theexercise}{\arabic{exercise}}
+
+\begin{exercise}
+    For each of the urn models, express the transition probability \( P_
+    {ij} \) of going to state \( j \) from state \( i \) in a general
+    form, using the cases construction.
+\end{exercise}
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+    \item
+        For the first Ehrenfest model
+        \[
+            P_{ij} =
+            \begin{cases}
+                i/k & j = i-1 \\
+                (k-i)/k & j = i+1 \\
+                0 & \text{ otherwise }
+            \end{cases}
+            .
+        \]
+    \item
+        For the second Ehrenfest model
+        \[
+            P_{ij} =
+            \begin{cases}
+                \frac{i}{k} q & j = i-1 \\
+                \frac{i}{k} p + \frac{k-i}{k} q & j = i \\
+                \frac{k-i}{k} p & j = i+1 \\
+                0 & \text{ otherwise }
+            \end{cases}
+            .
+        \]
+    \item
+        For the third Ehrenfest model
+        \[
+            P_{ij} =
+            \begin{cases}
+                \frac{k-i}{k} p & j = i-1 \\
+                \frac{i}{k} p + \frac{k-i}{k} q & j = i \\
+                \frac{i}{k} q & j = i+1 \\
+                0 & \text{ otherwise }
+            \end{cases}
+            .
+        \]
+    \item
+        For the fourth Ehrenfest model
+        \[
+            P_{ij} =
+            \begin{cases}
+                \frac{i(k-i)}{k^2} & j = i-1 \\
+                \frac{i^2}{k^2} + \frac{(k-i)^2}{k^2} & j = i \\
+                \frac{i(k-i)}{k^2} & j = i+1 \\
+                0 & \text{ otherwise }
+            \end{cases}
+            .
+        \]
+\end{enumerate}
+\end{solution}
+
+\begin{exercise}
+    Prove that the stationary distribution for the first Ehrenfest Urn
+    Model has entry \( \pi_i = \binom{k}{i}/2^k \).
+\end{exercise}
+
+\begin{solution}
+    Entry \( i \) must satisfy
+    \[
+        \binom{k}{i-1}\left( \frac{1}{2} \right)^k \cdot \frac{k-i}{k} +
+        \binom{k}{i+1}\left( \frac{1}{2} \right)^k \cdot \frac{i+1}{k} =
+        \binom{k}{i}\left( \frac{1}{2} \right)^k
+    \] or more simply
+    \[
+        \binom{k}{i-1} \cdot \frac{k-i+1}{k} + \binom{k}{i+1} \cdot
+        \frac{i+1}{k} = \binom{k}{i}.
+    \] This reduces to
+    \[
+        \binom{k-1}{i-1} + \binom{k-1}{i+1} = \binom{k}{i}.
+    \] which is the basic binomial (Pascal triangle) identity.
+\end{solution}
+
+\begin{exercise}
+    For the third and fourth Ehrenfest urn models with \( k = 7 \) and \(
+    p = q = 1/2 \) which have absorbing states \( 0 \) and \( k \), find
+    the absorption probabilities and the expected waiting times to
+    absorption from each transient state.
+\end{exercise}
+\begin{solution}
+    Using the probability transition matrix from \texttt{ehrnefest3.R}
+    and using the \texttt{markovchain} package in R\@:
+\begin{verbatim}
+R> absorptionProbabilities(ehrenfest3)
+         0        7
+1 0.984375 0.015625
+2 0.890625 0.109375
+3 0.656250 0.343750
+4 0.343750 0.656250
+5 0.109375 0.890625
+6 0.015625 0.984375
+R> meanAbsorptionTime(ehrenfest3)
+        1         2         3         4         5         6 
+ 3.033333  7.233333 10.733333 10.733333  7.233333  3.033333 
+\end{verbatim}
+
+    Using the probability transition matrix from \texttt{ehrnefest4.R}
+    and using the \texttt{markovchain} package in R\@:
+\begin{verbatim}
+R> absorptionProbabilities(ehrenfest4)
+          0         7
+1 0.8571429 0.1428571
+2 0.7142857 0.2857143
+3 0.5714286 0.4285714
+4 0.4285714 0.5714286
+5 0.2857143 0.7142857
+6 0.1428571 0.8571429
+R> meanAbsorptionTime(ehrenfest4)
+       1        2        3        4        5        6 
+17.15000 26.13333 30.21667 30.21667 26.13333 17.15000 
+\end{verbatim}
+\end{solution}
+
+\begin{exercise}
+    A certain system depends on a single machine that breaks down on any
+    given day with probability \( p \).  It takes two days to restore
+    the failed machine to normal service.  Form a Markov chain by taking
+    as states the pairs \( (x,y) \) where \( x \) is \( 1 \) if the
+    machine is in operating condition at the end of a day, \( 0 \)
+    otherwise and \( y \) is the number of days, \( 0 \), \( 1 \), or \(
+    2 \) the machine has been broken.  Compute the long-term system
+    availability if \( p = 0.01, 0.02, 0.05 \) and \( 0.10 \).
+\end{exercise}
+\begin{solution}
+    \[
+        P =
+        \begin{pmatrix}
+            q & p & 0 \\
+            0 & 0 & 1 \\
+            1 & 0 & 0
+        \end{pmatrix}
+    \] and
+    \[
+        (\pi_1, \pi_2,\pi_3) = \left( \frac{1}{1+2p}, \frac{p}{1+2p},
+        \frac{p}{1 + 2p} \right).
+    \]
+\end{solution}
+
+\begin{exercise}
+    Given \( m \) white balls and \( m \) black balls which are mixed
+    thoroughly and then equally distributed in two urns.  From each urn
+    one ball is randomly drawn and placed in the other urn.  Find the
+    transition matrix and the probability that after a very large number
+    of turns the first urn will have \( k \) white balls.
+\end{exercise}
+\begin{solution}
+    % Sveshnikov, problem 38.17, p.244. This is a generalization of
+    % Ross, Probability Models, 3rd edition, page 177, problem 1
+    Let the state be the number \( j \) of white balls.  \( p_{jj} = 2j(m-j)/m^2
+    \), \( p_{j,j+1} = (m-j)^2/m^2 \), \( p_{j,j-1} = j^2/m^2 \).  After
+    a large number of turns \( p_k^{\infty} = \binom{m}{k} p_0^{\infty} \),
+    where \( 1/p_0^{\infty} =\sum_{i=0}^m \left( \binom{m}{i} \right)^2
+    = \binom{2m}{m} \) and \( p_{ij}^{\infty} = \left( \binom{m}{i}
+    \right)^2/ \binom{2m}{m} \).
+\end{solution}
+\begin{exercise}
+    Unknown to public health officials, a person with a highly
+    contagious disease enters the population.  During each time period
+    the person infects a new person with probability \( p \) or his
+    symptoms appear and public health officials discover him, occurring
+    with probability \( 1-p \) and quarantine him so that he is unable
+    to infect additional people.  Compute the probability distribution
+    of the number of infected but undiscovered people in the population
+    at the time of first discovery of a carrier.  Assume each infected
+    person behaves like the first.
+\end{exercise}
+\begin{solution}
+    The state space is the set of nonnegative integers.  At time period \(
+    t \), suppose there are \( i \) infected individuals not in
+    quarantine.  Suppose that \( j \) ( \( 0 \le j \le i \)) of these
+    contagious individuals infect another \( j \) individuals and that \(
+    i-j \) are discovered and moved to quarantine.  At the next time
+    period there are a net number \( i + j - (i-j) = 2j \) infectives in
+    the population with probability \( \binom{i}{j}p^j(1-p)^j \).  This
+    is a discrete time Markov chain on an infinite state space with
+    transition probability \( p_{i\ell} = \binom{i}{\ell/2}p^{\ell/2}(1-p)^
+    {i-(\ell/2)} \) for \( i \ge 0 \) and \( 0 \le \ell \le 2i \) and \(
+    \ell \) even.
+
+    The probability that by period \( 1 \) the one carrier has not been
+    discovered is \( p \), by period \( 2 \) there are \( 2 \) carriers
+    and the probability that each is not yet discovered is \( p^{2} \),
+    by period three there are \( 4 \) carries with no discoveries with
+    probability \( p^{4} \), and by period \( n \) there are \( 2^{n-1} \)
+    carriers with no discoveries \( p^{2^{n-1}} \).
+\end{solution}
+
+\hr
+
+\visual{Books}{../../../../CommonInformation/Lessons/books.png}
+\section*{Reading Suggestion:}
+
+\bibliography{../../../../CommonInformation/bibliography}
+
+%   \begin{enumerate}
+%     \item
+%     \item
+%     \item
+%   \end{enumerate}
+
+\hr
+
+\visual{Links}{../../../../CommonInformation/Lessons/chainlink.png}
+\section*{Outside Readings and Links:}
+\begin{enumerate}
+    \item
+    \item
+    \item
+    \item
+\end{enumerate}
+
+\section*{\solutionsname} \loadSolutions
+
+\hr
+
+\mydisclaim \myfooter
+
+Last modified:  \flastmod
+
+\end{document}
+
+File name :  standardexamples.tex Number of characters :  31206 Number
+of words :  3657 Percent of complex words :  18.81 Average syllables per
+word :  1.7555 Number of sentences :  153 Average words per sentence :
+23.9020 Number of text lines :  656 Number of blank lines :  129 Number
+of paragraphs :  119
+
+READABILITY INDICES
+
+Fog :  17.0861 Flesch :  34.0561 Flesch-Kincaid :  14.4471
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
